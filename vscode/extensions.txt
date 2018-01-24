@@ -1,0 +1,7 @@
+code --list-extensions
+bibhasdn.django-html
+jebbs.plantuml
+lukehoban.Go
+magicstack.MagicPython
+ms-python.python
+yzhang.markdown-all-in-one

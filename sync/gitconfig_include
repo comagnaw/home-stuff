@@ -1,0 +1,4 @@
+[user]
+        signingkey = EE99CCD9
+[commit]
+        gpgsign = true

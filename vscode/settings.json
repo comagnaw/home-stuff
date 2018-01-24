@@ -1,0 +1,13 @@
+{
+    "files.autoSave": "afterDelay",
+    "workbench.colorTheme": "Tomorrow Night Blue",
+    "git.enableSmartCommit": true,
+    "git.enableCommitSigning": true,
+    "workbench.sideBar.location": "left",
+    "editor.minimap.enabled": false,
+    "files.associations": {
+        "*.p2": "html"
+    },
+    "explorer.confirmDelete": false,
+    "markdown.extension.preview.autoShowPreviewToSide": true
+}
