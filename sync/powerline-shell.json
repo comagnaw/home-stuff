@@ -6,10 +6,10 @@
     "ssh", 
     "cwd",
     "git", 
-    "hg", 
-    "jobs", 
-    "root",
-    "time"
+    "jobs",
+    "newline", 
+    "time",
+    "root"
   ], 
   "mode": "patched",
   "cwd": {
