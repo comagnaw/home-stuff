@@ -4,11 +4,20 @@
     "username", 
     "hostname", 
     "ssh", 
-    "cwd", 
+    "cwd",
     "git", 
     "hg", 
     "jobs", 
-    "root"
+    "root",
+    "time"
   ], 
-  "mode": "patched"
+  "mode": "patched",
+  "cwd": {
+      "max_depth": 4
+  },
+  "hostname": {
+	"colorize": true
+  },
+  "theme": "basic"
+
 }
