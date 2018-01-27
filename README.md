@@ -9,7 +9,3 @@ make prep
 make get
 make finish
 ```
-2. Setup Python Environment - Assumes brew is installed.
-```
-~/home/setup_python_env.sh
-```

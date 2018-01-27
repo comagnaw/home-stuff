@@ -9,5 +9,7 @@
         "*.p2": "html"
     },
     "explorer.confirmDelete": false,
-    "markdown.extension.preview.autoShowPreviewToSide": true
+    "markdown.extension.preview.autoShowPreviewToSide": true,
+    "workbench.startupEditor": "newUntitledFile",
+    "editor.fontFamily": "'Roboto Mono for Powerline', Menlo, Monaco, 'Courier New', monospace"
 }

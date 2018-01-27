@@ -7,5 +7,8 @@ cp ~/home/sync/screenrc_xterm-color ~/.screenrc
 cp ~/home/sync/git-completion.bash ~/.git-completion.bash
 cp ~/home/sync/powerline-shell.json ~/.powerline-shell.json
 cp ~/home/sync/gitconfig ~/.gitconfig
-cp ~/home/sync/gitconfig_include ~/.gitconfig_include
 cp ~/home/sync/pylintrc ~/.pylintrc
+
+if [ ${1} == 'git_include' ]; then
+    cp ~/home/sync/gitconfig_include ~/.gitconfig_include
+fi
