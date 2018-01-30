@@ -9,6 +9,6 @@ cp ~/.powerline-shell.json ~/home/sync/powerline-shell.json
 cp ~/.gitconfig ~/home/sync/gitconfig
 cp ~/.pylintrc ~/home/sync/pylintrc
 
-if [ ${1} == 'git_include' ]; then
+if [[ ${1} == 'git_include' ]]; then
     cp ~/.gitconfig_include ~/home/sync/gitconfig_include
 fi

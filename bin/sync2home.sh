@@ -11,6 +11,6 @@ cp ~/home/sync/pylintrc ~/.pylintrc
 
 cp ~/home/sync/homebrew.simonsimcity.update-notifier.plist ~/Library/LaunchAgents
 
-if [ ${1} == 'git_include' ]; then
+if [[ ${1} == 'git_include' ]]; then
     cp ~/home/sync/gitconfig_include ~/.gitconfig_include
 fi
