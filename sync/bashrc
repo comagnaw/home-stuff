@@ -21,9 +21,10 @@ alias repo='cd ~/repos/src/github.com'
 alias sublime='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl'
 
 function ga() { git add -A; }
-function gc() { git commit -m "$@"; }
+function gc() { git commit -m "$*"; }
 function gac() { ga; gc $@; }
 function gp() { git push;}
+
 
 function sclist() { screen -list; }
 function sckill() { screen -X -S ${1} quit; }
