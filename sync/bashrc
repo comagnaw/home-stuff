@@ -3,7 +3,7 @@ export EDITOR=vim
 source ~/.git-completion.bash
 
 export GOPATH="$HOME/repos"
-export PATH="/usr/local/bin:/usr/local/sbin:$PATH:~/home/bin:$GOPATH/bin"
+export PATH="/usr/local/bin:/usr/local/sbin:/usr/local/opt/openssl/bin:$PATH:~/home/bin:$GOPATH/bin"
 
 function _update_ps1() {
     PS1="$(powerline-shell $?)"
@@ -19,6 +19,11 @@ alias vi='vim'
 alias ls="ls -G"
 alias repo='cd ~/repos/src/github.com'
 alias sublime='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl'
+
+function ga() { git add -A; }
+function gc() { git commit -m "$@"; }
+function gac() { ga; gc $@; }
+function gp() { git push;}
 
 function sclist() { screen -list; }
 function sckill() { screen -X -S ${1} quit; }
