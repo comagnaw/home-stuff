@@ -1,24 +1,35 @@
 export EDITOR=vim
 
+export BASH_SILENCE_DEPRECATION_WARNING=1
+
 source ~/.git-completion.bash
 
 export GOPATH="$HOME/repos"
-export PATH="/usr/local/bin:/usr/local/sbin:/usr/local/opt/openssl/bin:$PATH:~/home/bin:$GOPATH/bin"
+export PATH="/usr/local/opt/python/libexec/bin:/usr/local/bin:/usr/local/sbin:/usr/local/opt/openssl/bin:$PATH:~/home/bin:$GOPATH/bin"
 
 function _update_ps1() {
-    PS1="$(powerline-shell $?)"
+    PS1="$(/usr/local/bin/powerline-go \
+	 -modules venv,user,host,ssh,cwd,git,newline,time,root \
+	 -cwd-max-depth 4 \
+	 -colorize-hostname \
+	 -error $?)"
 }
 
-if [ "$TERM" != "linux" ]; then
-    PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
-fi
+PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
 
 export LSCOLORS=GxBxHxDxFxHxHxHxHxCxCx
-
+alias sudo='sudo '
 alias vi='vim'
 alias ls="ls -G"
 alias repo='cd ~/repos/src/github.com'
 alias sublime='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl'
+
+alias vol0="ssh serviceadmin@vol0"
+alias worker0="ssh serviceadmin@worker0"
+alias worker1="ssh serviceadmin@worker1"
+alias ns1="ssh serviceadmin@ns1"
+alias ns2="ssh serviceadmin@ns2"
+alias volnfs="sshfs workers@vol0:/share ~/nfs -o allow_other,default_permissions,IdentityFile=.ssh/workers,idmap=file,uidfile=.nfs_config/vol0_uid_map,nomap=ignore -C"
 
 function ga() { git add -A; }
 function gc() { git commit -m "$*"; }
@@ -33,7 +44,7 @@ function gitco() { git log | grep Date | awk '{print " : "$4" "$3" "$6}' | uniq 
 # Set up virtualenvwrapper
 export WORKON_HOME=$HOME/.pyenvs
 export PROJECT_HOME=$HOME/repos/pyprojects
-source /usr/local/bin/virtualenvwrapper.sh
+#source /usr/local/bin/virtualenvwrapper.sh
 
 # Set up GPG
 GPG_TTY=$(tty)
