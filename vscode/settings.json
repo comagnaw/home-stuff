@@ -11,5 +11,10 @@
     "explorer.confirmDelete": false,
     "markdown.extension.preview.autoShowPreviewToSide": true,
     "workbench.startupEditor": "newUntitledFile",
-    "editor.fontFamily": "'Roboto Mono for Powerline', Menlo, Monaco, 'Courier New', monospace"
+    "editor.fontFamily": "'FuraMono-Regular Powerline', Menlo, Monaco, 'Courier New', monospace",
+    "terminal.integrated.profiles.osx": {
+        "zsh (login)": {
+            "path": "/usr/local/bin/zsh"
+            }
+    }
 }

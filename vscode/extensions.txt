@@ -1,7 +1,12 @@
 code --list-extensions
-bibhasdn.django-html
-jebbs.plantuml
-lukehoban.Go
+eamodio.gitlens
+golang.go
 magicstack.MagicPython
+mechatroner.rainbow-csv
+ms-azuretools.vscode-docker
 ms-python.python
+ms-python.vscode-pylance
+ms-toolsai.jupyter
+ms-vscode-remote.remote-containers
 yzhang.markdown-all-in-one
+zhuangtongfa.material-theme
