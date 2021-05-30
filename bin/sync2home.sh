@@ -4,6 +4,7 @@ cp ~/home/sync/zshrc ~/.zshrc
 cp ~/home/sync/vimrc ~/.vimrc
 cp ~/home/sync/screenrc_xterm-color ~/.screenrc
 cp ~/home/sync/gitconfig ~/.gitconfig
+cp ~/home/vscode/settings.json ~/Library/Application\ Support/Code/User/settings.json
 
 cp ~/home/sync/homebrew.simonsimcity.update-notifier.plist ~/Library/LaunchAgents
 

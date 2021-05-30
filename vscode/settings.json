@@ -11,10 +11,12 @@
     "explorer.confirmDelete": false,
     "markdown.extension.preview.autoShowPreviewToSide": true,
     "workbench.startupEditor": "newUntitledFile",
-    "editor.fontFamily": "'FuraMono-Regular Powerline', Menlo, Monaco, 'Courier New', monospace",
+    "editor.fontFamily": "'Roboto Mono for Powerline', Menlo, Monaco, 'Courier New', monospace",
     "terminal.integrated.profiles.osx": {
         "zsh (login)": {
             "path": "/usr/local/bin/zsh"
             }
-    }
+    },
+    "terminal.external.osxExec": "iTerm.app",
+    "terminal.integrated.fontFamily": "'Roboto Mono for Powerline'",   
 }

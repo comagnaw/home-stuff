@@ -122,11 +122,12 @@ function sckill() { screen -X -S ${1} quit; }
 function gac() { git add -A; git commit -m "$*"; }
 
 function sync2git() {
-    	cp ~/.zshrc ~/home/sync/zshrc
+    cp ~/.zshrc ~/home/sync/zshrc
 	cp ~/.vimrc ~/home/sync/vimrc
 	cp ~/.screenrc ~/home/sync/screenrc_xterm-color
 	cp ~/.gitconfig ~/home/sync/gitconfig
 	cp ~/.pylintrc ~/home/sync/pylintrc
+	cp ~/Library/Application\ Support/Code/User/settings.json ~/home/vscode/settings.json
 
 	if [[ ${1} == 'git_include' ]]; then
     		cp ~/.gitconfig_include ~/home/sync/gitconfig_include
@@ -134,11 +135,12 @@ function sync2git() {
 }
 
 function sync2home() {
-    	cp ~/home/sync/zshrc ~/.zshrc
+    cp ~/home/sync/zshrc ~/.zshrc
 	cp ~/home/sync/vimrc ~/.vimrc
 	cp ~/home/sync/screenrc_xterm-color ~/.screenrc
 	cp ~/home/sync/gitconfig ~/.gitconfig
 	cp ~/home/sync/pylintrc ~/.pylintrc
+	cp ~/home/vscode/settings.json ~/Library/Application\ Support/Code/User/settings.json
 
 	cp ~/home/sync/homebrew.simonsimcity.update-notifier.plist ~/Library/LaunchAgents
 
