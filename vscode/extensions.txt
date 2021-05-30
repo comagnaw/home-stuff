@@ -1,4 +1,3 @@
-code --list-extensions
 eamodio.gitlens
 golang.go
 magicstack.MagicPython
