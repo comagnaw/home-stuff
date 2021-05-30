@@ -8,6 +8,8 @@ export ZSH="/Users/msieger/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+
+
 ZSH_THEME="spaceship"
 
 # Set list of themes to pick from when loading at random
@@ -114,16 +116,17 @@ alias worker1="ssh serviceadmin@worker1"
 alias ns1="ssh serviceadmin@ns1"
 alias ns2="ssh serviceadmin@ns2"
 alias volnfs="sshfs workers@vol0:/share ~/nfs -o allow_other,default_permissions,IdentityFile=~/.ssh/workers,idmap=file,uidfile=.nfs_config/vol0_uid_map,nomap=ignore -C"
+
 function sclist() { screen -list; }
 function sckill() { screen -X -S ${1} quit; }
-function gitco() { git log | grep Date | awk '{print " : "$4" "$3" "$6}' | uniq -c; }
 function gac() { git add -A; git commit -m "$*"; }
 
 function sync2git() {
-    cp ~/.zshrc ~/home/sync/zshrc
+    	cp ~/.zshrc ~/home/sync/zshrc
 	cp ~/.vimrc ~/home/sync/vimrc
 	cp ~/.screenrc ~/home/sync/screenrc_xterm-color
 	cp ~/.gitconfig ~/home/sync/gitconfig
+	cp ~/.pylintrc ~/home/sync/pylintrc
 
 	if [[ ${1} == 'git_include' ]]; then
     		cp ~/.gitconfig_include ~/home/sync/gitconfig_include
@@ -131,10 +134,11 @@ function sync2git() {
 }
 
 function sync2home() {
-	cp ~/home/sync/zshrc ~/.zshrc
+    	cp ~/home/sync/zshrc ~/.zshrc
 	cp ~/home/sync/vimrc ~/.vimrc
 	cp ~/home/sync/screenrc_xterm-color ~/.screenrc
 	cp ~/home/sync/gitconfig ~/.gitconfig
+	cp ~/home/sync/pylintrc ~/.pylintrc
 
 	cp ~/home/sync/homebrew.simonsimcity.update-notifier.plist ~/Library/LaunchAgents
 
@@ -144,12 +148,11 @@ function sync2home() {
 }
 
 # Spaceship config
-SPACESHIP_DIR_TRUNC=3
 SPACESHIP_PROMPT_ADD_NEWLINE=true
 SPACESHIP_PROMPT_SEPARATE_LINE=true
 SPACESHIP_CHAR_SYMBOL="$ "
 SPACESHIP_CHAR_SYMBOL_ROOT="# "
-SPACESHIP_CHAR_SYMBOL_SECONDARY="$ "	
+SPACESHIP_CHAR_SYMBOL_SECONDARY="> "	
 SPACESHIP_HG_SHOW=false
 SPACESHIP_HG_BRANCH_SHOW=false
 SPACESHIP_HG_STATUS_SHOW=false
@@ -165,7 +168,7 @@ SPACESHIP_RUST_SHOW=false
 SPACESHIP_HASKELL_SHOW=false
 SPACESHIP_JULIA_SHOW=false
 SPACESHIP_DOCKER_SHOW=true
-SPACESHIP_DOCKER_CONTEXT_SHOW=false
+SPACESHIP_DOCKER_CONTEXT_SHOW=true
 SPACESHIP_AWS_SHOW=false
 SPACESHIP_VENV_SHOW=true
 SPACESHIP_CONDA_SHOW=false
@@ -173,7 +176,7 @@ SPACESHIP_PYENV_SHOW=true
 SPACESHIP_DOTNET_SHOW=false
 SPACESHIP_EMBER_SHOW=false
 SPACESHIP_KUBECTL_SHOW=true
-SPACESHIP_KUBECONTEXT_SHOW=false
+SPACESHIP_KUBECONTEXT_SHOW=true
 SPACESHIP_TERRAFORM_SHOW=false
 SPACESHIP_EXEC_TIME_SHOW=true
 SPACESHIP_BATTERY_SHOW=false
@@ -183,19 +186,105 @@ SPACESHIP_EXIT_CODE_SHOW=true
 SPACESHIP_USER_SHOW=always
 SPACESHIP_HOST_SHOW=always
 SPACESHIP_TIME_SHOW=true
-SPACESHIP_VENV_PREFIX="on "
-SPACESHIP_PYENV_PREFIX=""
-SPACESHIP_PYENV_SYMBOL="python "
-SPACESHIP_GOLANG_PREFIX=""
-SPACESHIP_GOLANG_SYMBOL="go "
 
-SPACESHIP_PROMPT_ORDER=(time exec_time line_sep docker kubectl user host dir git line_sep golang pyenv venv line_sep char)
+# DIR
+SPACESHIP_DIR_TRUNC=0
+SPACESHIP_DIR_PREFIX=" "
+SPACESHIP_DIR_TRUNC_REPO=false
+
+# USER
+SPACESHIP_USER_PREFIX="" # remove `with` before username
+SPACESHIP_USER_SUFFIX="" # remove space before host
+SPACESHIP_USER_COLOR="white"
+
+# HOST
+SPACESHIP_HOST_PREFIX="@"
+SPACESHIP_HOST_SUFFIX=""
+SPACESHIP_HOST_COLOR="yellow"
+
+#GIT
+SPACESHIP_GIT_PREFIX='git:('
+SPACESHIP_GIT_SUFFIX=") "
+SPACESHIP_GIT_BRANCH_SUFFIX=""
+SPACESHIP_GIT_STATUS_PREFIX=""
+SPACESHIP_GIT_STATUS_SUFFIX=""
+
+# GOLANG
+SPACESHIP_GOLANG_PREFIX="go:("
+SPACESHIP_GOLANG_SUFFIX=") "
+SPACESHIP_GOLANG_SYMBOL=""
+SPACESHIP_GOLANG_COLOR="green"
+
+# DOCKER
+SPACESHIP_DOCKER_PREFIX="docker:("
+SPACESHIP_DOCKER_SUFFIX=") "
+SPACESHIP_DOCKER_SYMBOL=""
+SPACESHIP_DOCKER_COLOR="cyan"
+
+# DOCKER CONTEXT
+SPACESHIP_DOCKER_CONTEXT_PREFIX=" context:"
+SPACESHIP_DOCKER_CONTEXT_SUFFIX=""
+
+# KUBECTL
+SPACESHIP_KUBECTL_PREFIX="kube:("
+SPACESHIP_KUBECTL_SUFFIX=") "
+SPACESHIP_KUBECTL_SYMBOL=""
+SPACESHIP_KUBECTL_COLOR="blue"
+SPACESHIP_KUBECTL_VERSION_COLOR="blue"
+
+# KUBECONTEXT
+SPACESHIP_KUBECONTEXT_PREFIX="context:"
+SPACESHIP_KUBECONTEXT_SUFFIX=""
+SPACESHIP_KUBECONTEXT_COLOR="blue"
+
+# VENV
+SPACESHIP_VENV_PREFIX="venv:("
+SPACESHIP_VENV_SUFFIX=") "
+
+# PYENV
+SPACESHIP_PYENV_PREFIX="python:("
+SPACESHIP_PYENV_SUFFIX=") "
+SPACESHIP_PYENV_SYMBOL=""
+SPACESHIP_PYENV_COLOR="green"
+
+# CUSTOM HORIZONTAL ROW
+SPACESHIP_HR_PREFIX=""
+SPACESHIP_HR_SUFFIX=""
+SPACESHIP_HR_SYMBOL=""
+SPACESHIP_HR_TEXT="${SPACESHIP_HR_TEXT="-"}"
+SPACESHIP_HR_COLOR="${SPACESHIP_HR_COLOR="red"}"
+
+spaceship_hr() {
+  [[ $SPACESHIP_HR_SHOW == false ]] && return
+
+  # Display WIP section
+  spaceship::section \
+    "$SPACESHIP_HR_COLOR" \
+    "$SPACESHIP_HR_PREFIX" \
+    "$SPACESHIP_HR_SYMBOL" \
+    "${(l.${COLUMNS}..-.)}" \
+    "$SPACESHIP_HR_SUFFIX"
+
+}
+
+#SPACESHIP_PROMPT_ORDER=(time exec_time line_sep hr line_sep docker kubectl user host dir git line_sep golang pyenv venv line_sep char)
+SPACESHIP_PROMPT_ORDER=(time exec_time line_sep hr line_sep golang pyenv venv docker kubectl line_sep user host dir git line_sep line_sep char)
+#SPACESHIP_RPROMPT_ORDER=(golang pyenv venv docker kubectl)
+
 
 # Set up pyenv/virtualenvwrapper
-eval "$(pyenv init -)"
 export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
 export WORKON_HOME=$HOME/.pyenvs
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init --path)"
+
+# Load pyenv into the shell by adding
+# the following to ~/.zshrc:
+
+eval "$(pyenv init -)"
 pyenv virtualenvwrapper_lazy
+
 
 # Set up GPG
 GPG_TTY=$(tty)
