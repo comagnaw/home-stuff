@@ -72,7 +72,8 @@ ZSH_THEME="spaceship"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=( kubectl golang git zsh-autosuggestions history-substring-search zsh-syntax-highlighting)
+#plugins=( kubectl golang git zsh-autosuggestions history-substring-search zsh-syntax-highlighting)
+plugins=( golang git zsh-autosuggestions history-substring-search zsh-syntax-highlighting)
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=white'
 
@@ -111,11 +112,41 @@ export PATH="/usr/local/bin:/usr/local/sbin:/usr/local/opt/openssl/bin:$PATH:~/h
 alias repo='cd ~/repos/src/github.com'
 alias sublime='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl'
 alias vol0="ssh serviceadmin@vol0"
+
 alias worker0="ssh serviceadmin@worker0"
 alias worker1="ssh serviceadmin@worker1"
+alias worker2="ssh serviceadmin@worker2"
+alias worker3="ssh serviceadmin@worker3"
+
+alias dc0="docker context use worker0"
+alias dc1="docker context use worker1"
+alias dc2="docker context use worker2"
+alias dc3="docker context use worker3"
+
+alias synconf="for i in 0 1 2;  do printf \"\n# worker\${i}\n\"; ssh serviceadmin@worker\${i} \"cd /opt/docker-cfg/dns-dhcp; git pull\" ; done"
+
+alias dmr1="dc2; docker restart ns1; docker ps"
+alias dmr2="dc0; docker restart ns2; docker ps"
+alias dmr="dmr1; sleep 3; dmr2"
+
 alias ns1="ssh serviceadmin@ns1"
 alias ns2="ssh serviceadmin@ns2"
 alias volnfs="sshfs workers@vol0:/share ~/nfs -o reconnect,allow_other,default_permissions,IdentityFile=~/.ssh/workers,idmap=file,uidfile=.nfs_config/vol0_uid_map,nomap=ignore,ServerAliveInterval=60,ServerAliveCountMax=3 -C"
+function dhcplog() { 
+	case ${1} in
+	    1)
+    		dc2
+		docker exec -it ns${1} tail -f /var/log/dnsmasq.log | grep -i dhcp 
+		;;
+	    2)
+    		dc0
+		docker exec -it ns${1} tail -f /var/log/dnsmasq.log | grep -i dhcp 
+	    	;;
+	    *)
+		echo "unknown argument ${1}"
+		;;
+	esac
+}
 
 function sclist() { screen -list; }
 function sckill() { screen -X -S ${1} quit; }
@@ -168,15 +199,15 @@ SPACESHIP_RUST_SHOW=false
 SPACESHIP_HASKELL_SHOW=false
 SPACESHIP_JULIA_SHOW=false
 SPACESHIP_DOCKER_SHOW=true
-SPACESHIP_DOCKER_CONTEXT_SHOW=true
+SPACESHIP_DOCKER_CONTEXT_SHOW=false
 SPACESHIP_AWS_SHOW=false
 SPACESHIP_VENV_SHOW=true
 SPACESHIP_CONDA_SHOW=false
 SPACESHIP_PYENV_SHOW=true
 SPACESHIP_DOTNET_SHOW=false
 SPACESHIP_EMBER_SHOW=false
-SPACESHIP_KUBECTL_SHOW=true
-SPACESHIP_KUBECONTEXT_SHOW=true
+#SPACESHIP_KUBECTL_SHOW=true
+#SPACESHIP_KUBECONTEXT_SHOW=true
 SPACESHIP_TERRAFORM_SHOW=false
 SPACESHIP_EXEC_TIME_SHOW=true
 SPACESHIP_BATTERY_SHOW=false
