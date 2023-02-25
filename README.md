@@ -1,11 +1,9 @@
-# home_osx
+# home-stuff
 
-1. Download make_home repo, which contains Makefile to set-up team repos and sync home
+1. Download make_home repo, which contains Makefile to set-up  home
 ```
 cd ~
 git clone git@github.com:comagnaw/make-home.git
 cd make-home
-make prep
-make get
-make finish
+scripts/install.sh all
 ```
